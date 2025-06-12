@@ -1,14 +1,12 @@
-import express from 'express'
-import dotenv from 'dotenv';
-import cors from 'cors';
-import connectDB from './db/dbConnect.js';
-import cookieParser from 'cookie-parser';
-import authRouter from './routes/authRouter.js';
-
-// for enabling the read from env file
-dotenv.config();
-
-// initializing the app
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import path from "path";
+import { fileURLToPath } from "url";
+import morgan from "morgan"; // Import morgan
+import connectDB from "./db/dbConnect.js";
+import authRouter from "./routes/authRouter.js";
+import { config } from "./config.js";
 const app = express();
 
 // middlewares
@@ -16,21 +14,22 @@ app.use(cors({
   origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173'],
   credentials: true,
 }));
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+app.use(morgan("dev")); // Add morgan here for request logging
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-connectDB()
+connectDB();
 
-// routes
-app.use('/api/auth', authRouter);
+app.use("/api/auth", authRouter);
 
-const PORT = process.env.PORT || 3000
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
-app.get('/', (req, res) => {
-    res.send("HELLO WORLD");
-})
+app.get("/*name", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
+});
 
-// listening all the request on given PORT
-app.listen(PORT, () => {
-    console.log(`Server is running on PORT : ${PORT}`);
-})
+app.listen(config.PORT, () => console.log(`Server on PORT: ${config.PORT}`));
