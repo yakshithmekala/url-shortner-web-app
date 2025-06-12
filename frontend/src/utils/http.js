@@ -5,10 +5,16 @@ function joinURL(baseURL, url) {
 }
 
 class Service {
-    domain = 'http://localhost:3000/api'
+
+    constructor(){
+        this.domain ="";
+        if (import.meta.env.VITE_BZENV === "development") {
+            this.domain = "http://localhost:3000";
+        }
+    }
 
     async request(url, method = "POST", data) {
-        url = joinURL(this.domain, url)
+        url = joinURL(this.domain, "api/" + url)
 
         const res = await axios
             .request({
