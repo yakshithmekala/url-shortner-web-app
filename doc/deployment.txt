@@ -1,0 +1,3 @@
+6. Deployment
+Deploy (Render / Railway)
+Environment Variable Management

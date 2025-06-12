@@ -1,0 +1,4 @@
+3. Backend
+Node.js
+Express (CRUD API development)
+MongoDB (with Mongoose for ODM)
