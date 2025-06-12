@@ -1,0 +1,1 @@
+export const GOOGLE_AUTH_LOGIN = 'auth/google'

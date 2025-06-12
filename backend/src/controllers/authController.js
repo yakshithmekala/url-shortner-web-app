@@ -76,7 +76,16 @@ export const loginWithGoogle = async (req, res) => {
             }
         );
 
-        return res.status(200).json({ status: "SUCCESS", message: "Login Successfully!" });
+        return res.status(200).json({ 
+            status: "SUCCESS", 
+            message: "Login Successfully!",
+            data: { 
+                name: user.name, 
+                email: user.email, 
+                token: userToken, 
+                avatar: user.avatar 
+            } 
+        });
 
     } catch (error) {
 
