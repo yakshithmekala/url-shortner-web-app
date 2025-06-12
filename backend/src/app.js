@@ -9,9 +9,14 @@ import authRouter from "./routes/authRouter.js";
 import { config } from "./config.js";
 const app = express();
 
+// middlewares
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5173'],
+  credentials: true,
+}));
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-app.use(cors());
 app.use(morgan("dev")); // Add morgan here for request logging
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
