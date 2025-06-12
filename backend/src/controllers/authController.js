@@ -1,5 +1,5 @@
 import { OAuth2Client } from 'google-auth-library';
-import userModel from '../models/user/user.model.js';
+import {User as userModel} from '../models/user/user.model.js';
 import jwt from 'jsonwebtoken';
 
 const oAuthClient = new OAuth2Client(
