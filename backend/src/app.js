@@ -12,10 +12,7 @@ import userRouter from "./routes/userRouter.js";
 const app = express();
 
 // middlewares
-app.use(cors({
-  origin: true,
-  credentials: true,
-}));
+app.use(cors());
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
