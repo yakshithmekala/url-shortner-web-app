@@ -1,0 +1,10 @@
+{
+  "name": "url-shortener",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "cd backend && npm i && npm start"
+  },
+  "author": ""
+}
