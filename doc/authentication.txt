@@ -1,0 +1,3 @@
+4. Authentication
+JWT-based Authentication & Authorization
+OAuth 2.0 (Google Login Integration)

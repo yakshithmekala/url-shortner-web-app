@@ -1,0 +1,4 @@
+2. Frontend
+JavaScript (Basics: ES6+, async/await, fetch/Axios)
+React (with Vite for fast setup)
+Mantine (UI components and styling)

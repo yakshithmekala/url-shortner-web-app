@@ -1,0 +1,2 @@
+5. Performance & Optimization
+Caching with Redis (for popular links and fast redirects)
