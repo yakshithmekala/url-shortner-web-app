@@ -21,10 +21,10 @@ connectDB();
 
 app.use("/api/auth", authRouter);
 
-app.use(express.static(path.join(__dirname, "../../frontend/built")));
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 app.get("/*name", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../frontend/built/index.html"));
+  res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
 });
 
 app.listen(config.PORT, () => console.log(`Server on PORT: ${config.PORT}`));
