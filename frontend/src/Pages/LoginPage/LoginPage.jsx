@@ -15,7 +15,6 @@ export default function LoginPage() {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const isLoggedIn = useSelector(getIsLoggedIn)
-    console.log(isLoggedIn)
     
     const googleResponse = async (res) => {
         try {
