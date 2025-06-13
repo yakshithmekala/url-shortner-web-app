@@ -47,7 +47,7 @@ function MyURLsPage() {
   // React Query Mutation for updating a short URL
   const updateUrlMutation = useMutation({
     mutationFn: async ({ shortCode, urlData }) => {
-      const response = await service.patch(`/shorten/${shortCode}`, urlData);
+      const response = await service.patch(`short-url/${shortCode}`, urlData);
       return response;
     },
     onSuccess: () => {
@@ -124,8 +124,8 @@ function MyURLsPage() {
   };
 
   // Helper function to construct the full shortened link
-  const getShortenedLink = (shortCode) =>
-    `${window.location.origin}/s/${shortCode}`; // Ensure this matches your redirection logic
+  const getShortenedLink = (shortCode) => `${service.getBaseURL()}/api/short-url/${shortCode}`;
+  // Ensure this matches your redirection logic
 
   // Conditional rendering based on login status
   if (!isLoggedIn) {
@@ -166,28 +166,34 @@ function MyURLsPage() {
 
   const rows = shortURLs.map((url) => (
     <Table.Tr key={url._id}>
-      <Table.Td >
+      <Table.Td style={{ textAlign: "center" }}><Center>
         <Anchor href={url.originalUrl} target="_blank" rel="noopener noreferrer" lineClamp={1}>
           <Tooltip label={url.originalUrl} position="bottom" withArrow>
             <span>{url.originalUrl.length > 25 ? `${url.originalUrl.slice(0, 25)}...` : url.originalUrl}</span>
           </Tooltip>
         </Anchor>
+        </Center>
       </Table.Td>
-      <Table.Td >
+      <Table.Td style={{ textAlign: "center" }}><Center>
         <Group spacing="xs" wrap="nowrap">
           <Anchor href={getShortenedLink(url.shortCode)} target="_blank" rel="noopener noreferrer" lineClamp={1}>
             {url.shortCode}
           </Anchor>
         </Group>
+        </Center>
       </Table.Td>
-      <Table.Td>{url.clickCount}</Table.Td>
-      <Table.Td>{new Date(url.createdAt).toLocaleDateString()}</Table.Td>
-      <Table.Td>
+      <Table.Td style={{ textAlign: "center" }}> <Center>{url.clickCount} </Center></Table.Td>
+      <Table.Td  > <Center>{new Date(url.createdAt).toLocaleDateString()} </Center> </Table.Td>
+      <Table.Td  >
+        <Center>
         {url.expiresAt
           ? new Date(url.expiresAt).toLocaleDateString()
           : <Text c="dimmed" fs="italic">Never</Text>}
+                  </Center>
+
       </Table.Td>
-      <Table.Td>
+      <Table.Td  >
+        <Center>
         <Group spacing="xs" wrap="nowrap">
           <Tooltip label="Edit URL" withArrow>
             <ActionIcon color="blue" variant="light" onClick={() => handleEditClick(url)}>
@@ -205,6 +211,7 @@ function MyURLsPage() {
             </ActionIcon>
           </Tooltip>
         </Group>
+        </Center>
       </Table.Td>
     </Table.Tr>
   ));
@@ -212,7 +219,7 @@ function MyURLsPage() {
   return (
     <Container size="xl" my="md">
       <Group justify="space-between" align="center" mb="md">
-        <Title order={2}>My Shortened URLs</Title>
+        <Title order={3}>Link Management</Title>
         {isFetching && ( // Show loader when refetching in background
           <Loader size="sm" />
         )}
@@ -227,15 +234,15 @@ function MyURLsPage() {
         </Alert>
       ) : (
         <Stack>
-          <Table striped highlightOnHover withTableBorder withColumnBorders>
+          <Table striped highlightOnHover withTableBorder withColumnBorders style={{tableLayout: 'fixed'}}>
             <Table.Thead>
-              <Table.Tr>
-                <Table.Th>Original URL</Table.Th>
-                <Table.Th>Short Link</Table.Th>
-                <Table.Th>Clicks</Table.Th>
-                <Table.Th>Created On</Table.Th>
-                <Table.Th>Expires On</Table.Th>
-                <Table.Th>Actions</Table.Th>
+              <Table.Tr  >
+                <Table.Th  > <Center>Original URL</Center> </Table.Th>
+                <Table.Th  ><Center>Short Link </Center></Table.Th>
+                <Table.Th  ><Center>Clicks</Center></Table.Th>
+                <Table.Th  ><Center>Created On</Center></Table.Th>
+                <Table.Th  ><Center>Expires On</Center></Table.Th>
+                <Table.Th  ><Center>Actions</Center></Table.Th>
               </Table.Tr>
             </Table.Thead>
             <Table.Tbody>{rows}</Table.Tbody>
