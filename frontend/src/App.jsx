@@ -7,6 +7,7 @@ import MyURLsPage from './Pages/User/MyURLsPage';
 import './index.css';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 import URLShortener from './Pages/URLShortener/URLShortener';
+import ProfilePage from './Pages/User/Profile';
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
             <Route element={<PrivateRoute/>}>
                 <Route path='/urlShortener' element={<URLShortener/>} />
                 <Route path='/url/list' element={<MyURLsPage/>} />
+                <Route path='/profile' element={<ProfilePage/>} />
+
             </Route>
         </Routes>
     </Router>
