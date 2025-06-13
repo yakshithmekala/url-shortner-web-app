@@ -13,7 +13,7 @@ const userRouter = Router();
 userRouter.get('/me', privateRoute, getUserDetails);
 
 // Route to get all short URLs created by the authenticated user, with pagination
-userRouter.get('/my-urls', privateRoute, getAllUserShortURLs);
+userRouter.get('/my/urls', privateRoute, getAllUserShortURLs);
 
 // Route to update details for the authenticated user
 userRouter.patch('/me', privateRoute, updateUserDetails);
