@@ -2,9 +2,6 @@ import jwt from 'jsonwebtoken';
 
 export const privateRoute = (req, res, next) => {
 
-
-     console.log(req.user, req.body);
-
     const jwtToken = req.cookies.jwt;
 
     if (!jwtToken) {
