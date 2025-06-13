@@ -11,13 +11,16 @@ import {
 } from '@tabler/icons-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIsLoggedIn, getUserAvatar, removeUser } from '../../redux/slices/User';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
 
     const userAvatar = useSelector(getUserAvatar);
     const isLoggedIn = useSelector(getIsLoggedIn);
     const dispatch = useDispatch();
+    const navigate = useNavigate(); // <--- This line is critical and must be inside the component body
+
+   
 
   return (
     <nav className='navbar' style={{ height: 60, width: '100%', background: 'linear-gradient(45deg, rgba(0, 160, 206, 0.8), rgba(220, 82, 241, 0.5))'}}>
@@ -31,9 +34,12 @@ const Navbar = () => {
                 </Menu.Target>
                 <Menu.Dropdown>
                     <Menu.Label>Actions</Menu.Label>
-                    <Menu.Item>
+                    <Menu.Item onClick={()=> navigate('/profile')}>
                         Profile
                     </Menu.Item>
+                    <Menu.Item onClick={()=> navigate('/url/list')}> {/* Use the logging handler here */}
+                            My Urls
+                        </Menu.Item>
                     <Menu.Item onClick={() => dispatch(removeUser())}>
                         Logout
                     </Menu.Item>
