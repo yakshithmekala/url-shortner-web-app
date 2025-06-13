@@ -18,7 +18,6 @@ export default function LoginPage() {
     
     const googleResponse = async (res) => {
         try {
-
             const token = res.credential
             
             if (!token) {
