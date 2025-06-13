@@ -8,7 +8,7 @@ import { ShortURL } from "../models/shorturl.model.js"; // Need to import ShortU
  */
 export const getUserDetails = async (req, res) => {
   try {
-    const userId = req.user?._id; // Get userId from the authenticated request
+    const userId = req.user?.id; // Get userId from the authenticated request
 
     if (!userId) {
       return res.status(401).json({ message: "User not authenticated." });
@@ -33,8 +33,6 @@ export const getUserDetails = async (req, res) => {
  */
 export const getAllUserShortURLs = async (req, res) => {
   try {
-
-    console.log(req.user);
     
     const userId = req.user?.id || ""; // Get userId from the authenticated request
 
