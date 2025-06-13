@@ -33,7 +33,10 @@ export const getUserDetails = async (req, res) => {
  */
 export const getAllUserShortURLs = async (req, res) => {
   try {
-    const userId = req.user?._id || req.body.id; // Get userId from the authenticated request
+
+    console.log(req.user);
+    
+    const userId = req.user?.id || ""; // Get userId from the authenticated request
 
     if (!userId) {
       return res.status(401).json({ message: "User not authenticated." });
