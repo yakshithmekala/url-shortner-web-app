@@ -3,7 +3,9 @@ import { nanoid } from "nanoid"; // You'll need to install nanoid: npm install n
 
 export const createShortURL = async (req, res) => {
   try {
-    const { originalUrl, userId, expiresAt, title, utm } = req.body;
+
+    const userId = req.user.id;
+    const { originalUrl, expiresAt, title, utm } = req.body;
 
     if (!originalUrl) {
       return res.status(400).json({ message: "Original URL is required." });

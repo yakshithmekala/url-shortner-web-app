@@ -5,6 +5,8 @@ import LoginPage from './Pages/LoginPage/LoginPage';
 import Navbar from './Components/Navbar/Navbar';
 import './App.css';
 import './index.css';
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
+import URLShortener from './Pages/URLShortener/URLShortener';
 
 function App() {
   return (
@@ -13,7 +15,9 @@ function App() {
         <Routes>
             <Route path='/' element={<Home/>}/>
             <Route path='/login' element={<LoginPage/>} />
-
+            <Route element={<PrivateRoute/>}>
+                <Route path='/urlShortener' element={<URLShortener/>} />
+            </Route>
         </Routes>
     </Router>
   )
