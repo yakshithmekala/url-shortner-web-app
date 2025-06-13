@@ -5,48 +5,60 @@ function joinURL(baseURL, url) {
 }
 
 class Service {
-    domain = 'http://localhost:3000/api'
-
-    async request(url, method = "POST", data) {
-        url = joinURL(this.domain, url)
-
-        const res = await axios
-            .request({
-                url,
-                method,
-                data,
-                withCredentials: true,
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-        return res.data;
+  constructor() {
+    this.domain = "";
+    if (import.meta.env.VITE_BZENV === "development") {
+      this.domain = "http://localhost:3000";
     }
+  }
 
-    post(url, data) {
-        const method = "POST"
-        return this.request(url, method, data)
-    }
+  async request(url, method = "POST", data) {
+    url = joinURL(this.domain, "api/" + url);
 
-    get(url) {
-        const method = "GET"
-        return this.request(url, method)
-    }
+    const res = await axios.request({
+      url,
+      method,
+      data,
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return res.data;
+  }
 
-    delete(url, data) {
-        const method = "DELETE"
-        return this.request(url, method, data)
-    }
+  post(url, data) {
+    const method = "POST";
+    return this.request(url, method, data);
+  }
 
-    put(url, data) {
-        const method = "PUT"
-        return this.request(url, method, data)
-    }
+  get(url) {
+    const method = "GET";
+    return this.request(url, method);
+  }
 
-    patch(url, data) {
-        const method = "PATCH"
-        return this.request(url, method, data)
+  delete(url, data) {
+    const method = "DELETE";
+    return this.request(url, method, data);
+  }
+
+  put(url, data) {
+    const method = "PUT";
+    return this.request(url, method, data);
+  }
+
+  patch(url, data) {
+    const method = "PATCH";
+    return this.request(url, method, data);
+  }
+
+
+  getBaseURL = () => {
+    if (import.meta.env.VITE_BZENV === "development") {
+      return import.meta.env.VITE_DEV_PROXY || "http://localhost:3000"; // fallback proxy
     }
+    return window.location.origin;
+  };
 }
 
 export default Service
