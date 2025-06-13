@@ -5,14 +5,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 import morgan from "morgan"; // Import morgan
 import connectDB from "./db/dbConnect.js";
-import authRouter from "./routes/authRouter.js";
 import { config } from "./config.js";
-import shortURLRouter from "./routes/shortURLRouter.js";
-import userRouter from "./routes/userRouter.js";
 const app = express();
 
 // middlewares
-// app.use(cors({ origin: true }));
 
 app.use(cors({
   origin: ['http://localhost:5173', 'http://127.0.0.1:5173'], // Be explicit
@@ -30,14 +26,11 @@ app.use(cookieParser());
 
 connectDB();
 
-app.use("/api/auth", authRouter);
-app.use("/api/short-url", shortURLRouter);
-app.use("/api/user", userRouter);
+
+// TODO add routes here
 
 app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
-app.get("/*name", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
-});
+app.get("/*name", (req, res) => { res.sendFile(path.join(__dirname, "../../frontend/dist/index.html")) });
 
 app.listen(config.PORT, () => console.log(`Server on PORT: ${config.PORT}`));
