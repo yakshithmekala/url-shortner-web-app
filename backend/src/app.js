@@ -9,7 +9,7 @@ import { config } from "./config.js";
 const app = express();
 
 // middlewares
-
+console.log("Yakshith")
 app.use(cors({
   origin: ['http://localhost:5173', 'http://127.0.0.1:5173'], // Be explicit
   credentials: true, // This is very often the fix for auth headers
